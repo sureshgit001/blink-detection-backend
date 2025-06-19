@@ -54,7 +54,7 @@ blink-detection-backend/
 
 ## 📦 Installation
 
-Make sure python- 3.10.13 is installed.
+Make sure python- 3.10.11 is installed.
 
 
 
