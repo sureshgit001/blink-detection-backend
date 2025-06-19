@@ -2,9 +2,11 @@ from flask import render_template, Response, jsonify
 from detection import generate, reset_state, get_blink_count, get_face_status, stop_camera, start_camera
 
 def configure_routes(app):
+    # In routes.py
     @app.route('/')
     def index():
-        return render_template('index.html')
+        return jsonify({"message": "Blink Detection Backend is running"})
+
 
     @app.route('/video_feed')
     def video_feed():
