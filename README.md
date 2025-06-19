@@ -18,7 +18,7 @@ This is the **Flask-based backend** for a real-time eye blink detection applicat
 
 ## 🛠 Tech Stack
 
-- Python 3.x
+- python-3.10.13
 - Flask
 - OpenCV
 - MediaPipe (FaceMesh)
@@ -54,7 +54,7 @@ blink-detection-backend/
 
 ## 📦 Installation
 
-Make sure Python 3 + is installed.
+Make sure python- 3.10.13 is installed.
 
 
 
