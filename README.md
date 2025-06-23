@@ -1,61 +1,85 @@
-# 👁️ Blink Detection Backend (Flask)
+👁️ Blink Detection Backend (Flask Only)
+This is the Flask-based backend for a real-time eye blink detection system using MediaPipe and OpenCV. It provides REST APIs that accept image frames and return blink count and face detection results. Supports multiple clients concurrently via client_id with persistent state storage.
 
-This is the **Flask-based backend** for a real-time eye blink detection application. It uses **MediaPipe** for facial landmark detection and **OpenCV** for webcam access and image processing. The backend is built to work with any frontend (e.g., React) that can consume REST APIs and live video streams.
+🧠 Features
+Real-time blink detection using Eye Aspect Ratio (EAR)
+Uses MediaPipe FaceMesh for landmark detection
+Detects and filters out head movements
+Supports multiple users via client_id
+Simple, modular Flask structure
 
----
+🛠 Tech Stack
+Python 3.10.11
+Flask
+Flask-CORS
+OpenCV
+MediaPipe
+NumPy
+SciPy
 
-## 🧠 Features
-
-- Real-time **blink detection** using Eye Aspect Ratio (EAR)
-- Calculates **Blink Rate (BPM)** (blinks per minute)
-- Filters out false positives due to **head movement**
-- Displays a **sky blue box** around the face
-- Provides **REST API endpoints** to manage detection state
-- Optimized for **low-light conditions** and fast blinking
-- Modular folder structure using `app.py`, `routes.py`, and `detection.py`
-
----
-
-## 🛠 Tech Stack
-
-- python-3.10.13
-- Flask
-- OpenCV
-- MediaPipe (FaceMesh)
-- NumPy
-- Flask-CORS
-
----
-
-## 📂 Folder Structure
+📁 Folder Structure
 blink-detection-backend/
-├── app.py # Flask app initialization and server entry point
-├── routes.py # API route definitions
-├── detection.py # Video stream and blink detection logic
-├── requirements.txt # Python dependencies
-└── README.md # Project description (this file)
+├── app.py             # Entry point of the Flask server
+├── routes.py          # API routes for detection and reset
+├── detection.py       # Core blink detection logic
+├── requirements.txt   # Python dependencies
+└── README.md          # Documentation (this file)
 
 
----
+📦 Installation
+Clone the repository
+git clone <your-repo-url>
+cd blink-detection-backend
 
-## 🔌 REST API Endpoints
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-| Method | Endpoint         | Description                              |
-|--------|------------------|------------------------------------------|
-| GET    | `/`              | Loads homepage (optional for backend)    |
-| GET    | `/video_feed`    | Returns MJPEG webcam stream              |
-| GET    | `/stop`          | Stops the video detection                |
-| GET    | `/blink_count`   | Returns total blink count                |
-| GET    | `/reset`         | Resets all blink stats                   |
-| GET    | `/face_status`   | Returns whether a face is detected       |
-| GET    | `/health`        | Returns server health status             |
+Install dependencies
+pip install -r requirements.txt
+Or manually:
+pip install flask flask-cors opencv-python mediapipe scipy numpy
 
----
+▶️ Run the Server
+python app.py
+Server will start at: http://127.0.0.1:5000
 
-## 📦 Installation
+🔌 API Endpoints
+POST /upload_frame
+Send a single base64-encoded frame for blink detection.
 
-Make sure python- 3.10.11 is installed.
+Request Body:
+{
+  "client_id": "your_unique_id",
+  "image": "data:image/png;base64,..."  // Full base64 image string
+}
+
+Response:
+{
+  "blink_count": 2,
+  "face_detected": true
+}
 
 
+POST /reset
+Reset the blink count and detection state for a specific client.
+
+Request Body:
+{ "client_id": "your_unique_id" }
+
+Response:
+{ "status": "reset" }
+
+GET /health
+Health check endpoint.
+
+Response:
+{ "status": "ok" }
 
 
+✅ requirements.txt
+flask
+flask-cors
+opencv-python
+mediapipe
+scipy
+numpy

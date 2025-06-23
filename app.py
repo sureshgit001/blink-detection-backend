@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
-from routes import configure_routes
+from routes import register_routes
+
 import os
 app = Flask(__name__)
 
@@ -8,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Register routes
-configure_routes(app)
+register_routes(app)
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
