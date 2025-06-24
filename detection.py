@@ -9,7 +9,11 @@ import mediapipe as mp
 
 mp_face_mesh = mp.solutions.face_mesh
 face_mesh = mp_face_mesh.FaceMesh(
+<<<<<<< HEAD
     static_image_mode=False,  # ✅ allows tracking
+=======
+    static_image_mode=True,
+>>>>>>> 36ba99daade004052c249f63ca3e99bf1ee5d407
     max_num_faces=1,
     refine_landmarks=True,
     min_detection_confidence=0.5,
